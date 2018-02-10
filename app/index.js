@@ -4,7 +4,7 @@ import "./index.css";
 
 export default class App extends React.Component {
   render() {
-    return <div>hello</div>;
+    return <div>hello world</div>;
   }
 }
 
