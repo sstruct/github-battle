@@ -2,19 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import "./index.css";
+import App from "./components";
 
-const names = ["Adam", "Eva", "God", "Snake"];
-
-export default class App extends React.Component {
-  render() {
-    return (
-      <div>
-        Names:
-        <ul>{names.map(o => <li key={o}>{o}</li>)}</ul>
-      </div>
-    );
-  }
-}
 ReactDOM.render(<App />, document.getElementById("app"));
 
 /**
@@ -60,7 +49,7 @@ App.propTypes = {
 
   // You can also declare that a prop is an instance of a class. This uses
   // JS's instanceof operator.
-  optionalMessage: PropTypes.instanceOf(Message),
+  optionalMessage: PropTypes.instanceOf(App),
 
   // You can ensure that your prop is limited to specific values by treating
   // it as an enum.
@@ -70,7 +59,7 @@ App.propTypes = {
   optionalUnion: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
-    PropTypes.instanceOf(Message)
+    PropTypes.instanceOf(App)
   ]),
 
   // An array of a certain type
