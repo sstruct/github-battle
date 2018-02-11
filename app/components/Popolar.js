@@ -1,4 +1,5 @@
 import React from "react";
+import { fetchPopularRepos } from "../utils/api";
 
 const languages = ["All", "JavaScript", "Ruby", "Java", "CSS", "Python"];
 
@@ -6,13 +7,23 @@ export default class Popular extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedLanguage: "All"
+      selectedLanguage: "All",
+      repos: null
     };
+  }
+  componentDidMount() {
+    this.updateLanguage(this.state.selectedLanguage);
   }
   updateLanguage(lang) {
     this.setState(() => ({
-      selectedLanguage: lang
+      selectedLanguage: lang,
+      repos: null
     }));
+    fetchPopularRepos(lang).then(res => {
+      this.setState({
+        repos: res
+      });
+    });
   }
   render() {
     return (
@@ -32,7 +43,7 @@ export default class Popular extends React.Component {
             </li>
           ))}
         </ul>
-        selectedLanguage: {this.state.selectedLanguage}
+        {JSON.stringify(this.state.repos)}
       </div>
     );
   }
