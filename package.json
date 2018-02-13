@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "prop-types": "^15.6.0",
+    "query-string": "^5.1.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2"
@@ -36,12 +37,23 @@
     "webpack-dev-server": "^2.11.1"
   },
   "babel": {
-    "plugins": ["transform-class-properties"],
-    "presets": ["env", "react"]
+    "plugins": [
+      "transform-class-properties"
+    ],
+    "presets": [
+      "env",
+      "react"
+    ]
   },
   "eslint": {
     "parser": "babel-eslint",
-    "extends": ["airbnb"],
-    "plugins": ["react", "jsx-a11y", "import"]
+    "extends": [
+      "airbnb"
+    ],
+    "plugins": [
+      "react",
+      "jsx-a11y",
+      "import"
+    ]
   }
 }
