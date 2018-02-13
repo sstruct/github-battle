@@ -3,8 +3,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const AutoDllPlugin = require("autodll-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
+const webpack = require("webpack");
 
-module.exports = {
+const config = {
   entry: "./app/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -38,9 +39,7 @@ module.exports = {
     // It will redirect all assets requests to publicPath "/"
     historyApiFallback: true
   },
-  devtool: "cheap-source-map",
   plugins: [
-    new BundleAnalyzerPlugin(),
     new HtmlWebpackPlugin({
       inject: true,
       template: path.resolve(__dirname, "app/index.html")
@@ -56,3 +55,28 @@ module.exports = {
     })
   ]
 };
+
+if (process.env.NODE_ENV === "development") {
+  config.devtool = "cheap-source-map";
+  config.plugins.push(
+    new BundleAnalyzerPlugin(),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: "development"
+      }
+    })
+  );
+}
+
+if (process.env.NODE_ENV === "production") {
+  config.plugins.push(
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: "production"
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin()
+  );
+}
+
+module.exports = config;
